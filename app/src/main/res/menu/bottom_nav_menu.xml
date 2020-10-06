@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_current_alerts"
+        android:icon="@android:drawable/ic_menu_help"
+        android:title="@string/title_current" />
+
+    <item
+        android:id="@+id/navigation_upcoming_events"
+        android:icon="@android:drawable/ic_menu_my_calendar"
+        android:title="@string/title_upcoming" />
+
+    <item
+        android:id="@+id/navigation_admin_view"
+        android:icon="@android:drawable/ic_menu_manage"
+        android:title="@string/title_admin" />
+
+</menu>

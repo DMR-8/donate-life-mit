@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "140503602306",
+    "firebase_url": "https://donate-life-mit.firebaseio.com",
+    "project_id": "donate-life-mit",
+    "storage_bucket": "donate-life-mit.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:140503602306:android:9503c89c88719caf80909b",
+        "android_client_info": {
+          "package_name": "edu.manipal.donatelifemit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "140503602306-fmc3d0442fncojps6ouunlibahcgfae6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.manipal.donatelifemit",
+            "certificate_hash": "9bc1d6092479b78b20c61f043e609fffb13ac941"
+          }
+        },
+        {
+          "client_id": "140503602306-nbsl16vq5pqhc0jvkqsme2hccun79itc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZMYpUtzXn195ozGS0uEZUUWaS_wETdEQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "140503602306-nbsl16vq5pqhc0jvkqsme2hccun79itc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
