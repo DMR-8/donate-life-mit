@@ -5,25 +5,39 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import edu.manipal.donatelifemit.R
 import edu.manipal.donatelifemit.pojo.Alert
+import edu.manipal.donatelifemit.pojo.IUserAlertListener
+import edu.manipal.donatelifemit.pojo.Utility
+import kotlinx.android.synthetic.main.cell_edit_alert.view.*
 import kotlinx.android.synthetic.main.cell_received_alert.view.*
+import kotlinx.android.synthetic.main.cell_received_alert.view.bloodTypeText
+import kotlinx.android.synthetic.main.cell_received_alert.view.centerNameText
+import kotlinx.android.synthetic.main.cell_received_alert.view.postTimeText
+import kotlinx.android.synthetic.main.cell_received_alert.view.unitText
 
 
-class UserAlertAdaptor(private val context: Context, private val options: FirebaseRecyclerOptions<Alert> ) : FirebaseRecyclerAdapter<Alert, UserAlertAdaptor.ViewHolder>(options) {
+class UserAlertAdaptor(private val context: Context,
+                       private val bloodTypeList:List<String>,
+                       private val options: FirebaseRecyclerOptions<Alert>,
+                        private val listener: IUserAlertListener) : FirebaseRecyclerAdapter<Alert, UserAlertAdaptor.ViewHolder>(options) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.cell_received_alert, parent, false)
+        val view: ViewGroup = LayoutInflater.from(parent.context).inflate(R.layout.cell_received_alert, parent, false) as ViewGroup
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int, model: Alert) {
-        holder.bind(model)
+        if(bloodTypeList.contains(model.bloodType))
+            holder.bind(model)
+        else
+            holder.hide()
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -31,9 +45,11 @@ class UserAlertAdaptor(private val context: Context, private val options: Fireba
             itemView.centerNameText.text = alert.centreName
             itemView.bloodTypeText.text = alert.bloodType
             itemView.unitText.text = alert.units.toString() + " Units"
+            itemView.postTimeText.text = "Posted: " + Utility.getVisualDate(alert.postTime)
 
             itemView.availableButton.setOnClickListener {
-
+                listener.registerAvailable(alert)
+                Toast.makeText(context, "You have registered as a donor for the request, You will be contacted by our team shortly.", Toast.LENGTH_SHORT).show()
             }
 
             itemView.shareButton.setOnClickListener {
@@ -44,6 +60,9 @@ class UserAlertAdaptor(private val context: Context, private val options: Fireba
                 intent.putExtra(Intent.EXTRA_SUBJECT, "Share")
                 context.startActivity(Intent.createChooser(intent, "Share using"))
             }
+        }
+        fun hide() {
+            itemView.visibility = View.GONE
         }
     }
 }

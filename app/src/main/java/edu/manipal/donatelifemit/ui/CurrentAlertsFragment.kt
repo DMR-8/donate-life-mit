@@ -17,6 +17,7 @@ import edu.manipal.donatelifemit.MainViewModel
 import edu.manipal.donatelifemit.R
 import edu.manipal.donatelifemit.adaptor.UserAlertAdaptor
 import edu.manipal.donatelifemit.pojo.Alert
+import edu.manipal.donatelifemit.pojo.IUserAlertListener
 import kotlinx.android.synthetic.main.fragment_current_alerts.*
 import kotlinx.android.synthetic.main.fragment_current_alerts.view.*
 
@@ -59,7 +60,18 @@ class CurrentAlertsFragment : Fragment() {
 
             options.setQuery(query, Alert::class.java)
 
-            adaptor = UserAlertAdaptor(requireContext(), options.build())
+            adaptor = UserAlertAdaptor(requireContext(), viewModel.userDetailsLiveData.value!!.receiveAlertList, options.build(), object : IUserAlertListener {
+                override fun registerAvailable(alert: Alert) {
+                    viewModel.userDetailsLiveData.value?.phoneNumber?.let{
+                        if(!alert.donatorList.contains(it))
+                            alert.donatorList.add(it)
+                        viewModel.alertDatabase.child(alert.alertID).setValue(alert)
+
+                    }
+
+                }
+
+            })
             alertRecycler.adapter = adaptor
             adaptor?.startListening()
         })

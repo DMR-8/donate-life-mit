@@ -44,7 +44,7 @@ class AdminViewAlertsFragment : Fragment() {
 
         options.setQuery(query, Alert::class.java)
 
-        adaptor = AdminAlertAdaptor(options.build(), object : IViewEditAlertListener {
+        adaptor = AdminAlertAdaptor(requireContext(), options.build(), object : IViewEditAlertListener {
             override fun onEditClick(alert: Alert) {
                 viewModel.selectedAlert = alert
                 viewModel.setState(ApplicationState.ADMIN_EDIT_ALERTS)
@@ -52,6 +52,11 @@ class AdminViewAlertsFragment : Fragment() {
 
             override fun onDeleteClick(alert: Alert) {
                 viewModel.alertDatabase.child(alert.alertID).removeValue()
+            }
+
+            override fun onViewClick(alert: Alert) {
+                viewModel.selectedAlert = alert
+                viewModel.setState(ApplicationState.VIEW_ALERT_DETAILS)
             }
 
         })

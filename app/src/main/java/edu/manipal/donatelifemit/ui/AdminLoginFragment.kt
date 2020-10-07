@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,8 +33,14 @@ class AdminLoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         loginButton.setOnClickListener {
-            viewModel.adminLogin = true
-            viewModel.setState(ApplicationState.ADMIN_ACCESS)
+            if( usernameField.text.toString() == "kmcbloodbank" && passwordField.text.toString() == "manipal123456"){
+                viewModel.adminLogin = true
+                viewModel.setState(ApplicationState.ADMIN_ACCESS)
+            } else {
+                viewModel.adminLogin = false
+                Toast.makeText(context, "Incorrect Credentials, Please Try again with proper credentials", Toast.LENGTH_SHORT).show()
+            }
+
         }
     }
     companion object {

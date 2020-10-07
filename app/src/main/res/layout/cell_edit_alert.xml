@@ -27,6 +27,19 @@
             app:layout_constraintTop_toTopOf="parent"
             />
         <TextView
+            android:id="@+id/viewAlertDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="View"
+            android:clickable="true"
+            android:textColor="@android:color/holo_green_light"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf= "parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+        <TextView
             android:id="@+id/bloodTypeText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -48,6 +61,18 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toEndOf="@id/bloodTypeText"
+            app:layout_constraintTop_toBottomOf="@id/centerNameText"
+            />
+        <TextView
+            android:id="@+id/postTimeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="Posted: 23 Sept, 2020"
+            android:textColor="@android:color/darker_gray"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/centerNameText"
             />
         <LinearLayout

@@ -23,6 +23,7 @@ enum class ApplicationState {
     ADMIN_LOG_IN,
     ADMIN_ACCESS,
     ADMIN_VIEW_ALERTS,
+    VIEW_ALERT_DETAILS,
     ADMIN_EDIT_ALERTS,
     ADD_ALERT,
     FINISH

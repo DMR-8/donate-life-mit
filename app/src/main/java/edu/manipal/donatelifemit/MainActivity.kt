@@ -98,6 +98,9 @@ class MainActivity : AppCompatActivity() {
                 ADMIN_EDIT_ALERTS -> {
                     replaceFragment(EditAlertFragment.newInstance(),R.id.host_fragment)
                 }
+                VIEW_ALERT_DETAILS -> {
+                    replaceFragment(ViewAlertDetails.newInstance(),R.id.host_fragment)
+                }
             }
         })
         if(FirebaseAuth.getInstance().currentUser == null) {

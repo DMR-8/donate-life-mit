@@ -78,6 +78,7 @@ class AddAlertFragment : Fragment() {
                     donationTypeSpinner.selectedItem.toString(),
                     bloodGroupSpinner.selectedItem.toString(),
                     unitText.text.toString().toInt(),
+                    System.currentTimeMillis(),
                     centreNameText.text.toString(),
                     alertID = newPostRef.key.toString()
                 )
