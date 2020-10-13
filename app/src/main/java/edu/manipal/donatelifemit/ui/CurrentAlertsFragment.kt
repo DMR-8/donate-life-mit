@@ -48,18 +48,8 @@ class CurrentAlertsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getAlertList().observe( viewLifecycleOwner, Observer {
-            val options: FirebaseRecyclerOptions.Builder<Alert> = FirebaseRecyclerOptions.Builder<Alert>()
             var query: Query = viewModel.alertDatabase
-
-            var tempArray: ArrayList<DatabaseReference> = ArrayList()
-
-            for(bloodtype in it){
-                tempArray.add(viewModel.alertDatabase.child(bloodtype))
-                query.equalTo(bloodtype)
-            }
-
-            options.setQuery(query, Alert::class.java)
-
+            val options: FirebaseRecyclerOptions.Builder<Alert> = FirebaseRecyclerOptions.Builder<Alert>().setQuery(query, Alert::class.java)
             adaptor = UserAlertAdaptor(requireContext(), viewModel.userDetailsLiveData.value!!.receiveAlertList, options.build(), object : IUserAlertListener {
                 override fun registerAvailable(alert: Alert) {
                     viewModel.userDetailsLiveData.value?.phoneNumber?.let{

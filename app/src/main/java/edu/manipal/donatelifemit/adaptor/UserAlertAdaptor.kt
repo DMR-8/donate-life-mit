@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
@@ -14,12 +13,7 @@ import edu.manipal.donatelifemit.R
 import edu.manipal.donatelifemit.pojo.Alert
 import edu.manipal.donatelifemit.pojo.IUserAlertListener
 import edu.manipal.donatelifemit.pojo.Utility
-import kotlinx.android.synthetic.main.cell_edit_alert.view.*
 import kotlinx.android.synthetic.main.cell_received_alert.view.*
-import kotlinx.android.synthetic.main.cell_received_alert.view.bloodTypeText
-import kotlinx.android.synthetic.main.cell_received_alert.view.centerNameText
-import kotlinx.android.synthetic.main.cell_received_alert.view.postTimeText
-import kotlinx.android.synthetic.main.cell_received_alert.view.unitText
 
 
 class UserAlertAdaptor(private val context: Context,
@@ -27,6 +21,7 @@ class UserAlertAdaptor(private val context: Context,
                        private val options: FirebaseRecyclerOptions<Alert>,
                         private val listener: IUserAlertListener) : FirebaseRecyclerAdapter<Alert, UserAlertAdaptor.ViewHolder>(options) {
 
+    private val showList:ArrayList<Alert> = ArrayList<Alert>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view: ViewGroup = LayoutInflater.from(parent.context).inflate(R.layout.cell_received_alert, parent, false) as ViewGroup
@@ -36,9 +31,14 @@ class UserAlertAdaptor(private val context: Context,
     override fun onBindViewHolder(holder: ViewHolder, position: Int, model: Alert) {
         if(bloodTypeList.contains(model.bloodType))
             holder.bind(model)
-        else
+        else{
             holder.hide()
+            val params = holder.itemView.layoutParams
+            params.height = 0
+            holder.itemView.layoutParams = params
+        }
     }
+
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(alert: Alert) {

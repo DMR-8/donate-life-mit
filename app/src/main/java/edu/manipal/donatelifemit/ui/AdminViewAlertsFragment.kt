@@ -62,6 +62,9 @@ class AdminViewAlertsFragment : Fragment() {
         })
         alertRecycler.adapter = adaptor
         adaptor?.startListening()
+        back_button.setOnClickListener {
+            viewModel.setState(ApplicationState.ADMIN_ACCESS)
+        }
     }
     companion object {
         @JvmStatic
