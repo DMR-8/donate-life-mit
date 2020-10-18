@@ -2,11 +2,13 @@ package edu.manipal.donatelifemit
 
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
@@ -30,9 +32,12 @@ class MainActivity : AppCompatActivity() {
     private val providers = arrayListOf(
         AuthUI.IdpConfig.PhoneBuilder().setDefaultCountryIso("IN").build()
     )
+    val PREFERENCE_NAME = "donatelife_preferences"
+    val IF_VISITED = "if_visited"
 
 
-    private var CHECK_SIGN_IN=1;
+    private var FIRST_TIME=1
+    private var CHECK_SIGN_IN=2
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -103,7 +108,12 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
-        if(FirebaseAuth.getInstance().currentUser == null) {
+        val preferences = applicationContext.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
+        var ifVisited = preferences.getBoolean(IF_VISITED, false)
+        if(!ifVisited) {
+            var intent = Intent(this@MainActivity, GuidelinesActivity::class.java)
+            startActivityForResult(intent, FIRST_TIME)
+        } else if(FirebaseAuth.getInstance().currentUser == null) {
             startActivityForResult(
                 AuthUI.getInstance()
                     .createSignInIntentBuilder()
@@ -129,6 +139,35 @@ class MainActivity : AppCompatActivity() {
                 val user = FirebaseAuth.getInstance().currentUser
                 viewModel.setState(CURRENT_ALERTS)
                 viewModel.readUser()
+                // ...
+            } else {
+                // Sign in failed. If response is null the user canceled the
+                // sign-in flow using the back button. Otherwise check
+                // response.getError().getErrorCode() and handle the error.
+                // ...
+            }
+        }
+        if (requestCode == FIRST_TIME) {
+            val response = IdpResponse.fromResultIntent(data)
+
+            if (resultCode == Activity.RESULT_OK) {
+                // Successfully signed in
+                val preferences = applicationContext.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE)
+                val editor = preferences.edit()
+                editor.putBoolean(IF_VISITED, true)
+                editor.apply()
+                if(FirebaseAuth.getInstance().currentUser == null) {
+                    startActivityForResult(
+                        AuthUI.getInstance()
+                            .createSignInIntentBuilder()
+                            .setAvailableProviders(providers)
+                            .build(),
+                        CHECK_SIGN_IN)
+                } else {
+                    val user = FirebaseAuth.getInstance().currentUser
+                    viewModel.setState(CURRENT_ALERTS)
+                    viewModel.readUser()
+                }
                 // ...
             } else {
                 // Sign in failed. If response is null the user canceled the

@@ -65,7 +65,7 @@ class ReceiveAlertsFragment : Fragment() {
         })
         bloodRecycler.adapter = adaptor
         viewModel.receiveAlertData.observe( viewLifecycleOwner, Observer {
-            adaptor?.setContent(bloodTypeList, viewModel.userDetailsLiveData.value!!.receiveAlertList)
+            adaptor?.setContent(bloodTypeList, it)
         })
 
 
@@ -75,6 +75,8 @@ class ReceiveAlertsFragment : Fragment() {
             viewModel.setState(ApplicationState.CURRENT_ALERTS)
         }
     }
+
+
     companion object {
         @JvmStatic
         fun newInstance() =

@@ -18,6 +18,7 @@ import edu.manipal.donatelifemit.R
 import edu.manipal.donatelifemit.adaptor.UserAlertAdaptor
 import edu.manipal.donatelifemit.pojo.Alert
 import edu.manipal.donatelifemit.pojo.IUserAlertListener
+import edu.manipal.donatelifemit.ui.dialogs.CovidDialogBuilder
 import kotlinx.android.synthetic.main.fragment_current_alerts.*
 import kotlinx.android.synthetic.main.fragment_current_alerts.view.*
 
@@ -50,13 +51,12 @@ class CurrentAlertsFragment : Fragment() {
         viewModel.getAlertList().observe( viewLifecycleOwner, Observer {
             var query: Query = viewModel.alertDatabase
             val options: FirebaseRecyclerOptions.Builder<Alert> = FirebaseRecyclerOptions.Builder<Alert>().setQuery(query, Alert::class.java)
-            adaptor = UserAlertAdaptor(requireContext(), viewModel.userDetailsLiveData.value!!.receiveAlertList, options.build(), object : IUserAlertListener {
+            adaptor = UserAlertAdaptor(requireContext(), listOf(), options.build(), object : IUserAlertListener {
                 override fun registerAvailable(alert: Alert) {
                     viewModel.userDetailsLiveData.value?.phoneNumber?.let{
                         if(!alert.donatorList.contains(it))
                             alert.donatorList.add(it)
                         viewModel.alertDatabase.child(alert.alertID).setValue(alert)
-
                     }
 
                 }
@@ -64,7 +64,14 @@ class CurrentAlertsFragment : Fragment() {
             })
             alertRecycler.adapter = adaptor
             adaptor?.startListening()
+            viewModel.receiveAlertData.observe( viewLifecycleOwner, Observer {
+                adaptor?.setContent(it)
+            })
         })
+
+        covid_alert_btn.setOnClickListener {
+            CovidDialogBuilder().setParentFragmentManager(parentFragmentManager).build()
+        }
     }
 
     companion object {
@@ -83,5 +90,9 @@ class CurrentAlertsFragment : Fragment() {
     override fun onStop() {
         super.onStop()
        adaptor?.stopListening()
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        adaptor?.stopListening()
     }
 }

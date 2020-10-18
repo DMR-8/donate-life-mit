@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.cell_received_alert.view.*
 
 
 class UserAlertAdaptor(private val context: Context,
-                       private val bloodTypeList:List<String>,
+                       private var bloodTypeList:List<String>,
                        private val options: FirebaseRecyclerOptions<Alert>,
                         private val listener: IUserAlertListener) : FirebaseRecyclerAdapter<Alert, UserAlertAdaptor.ViewHolder>(options) {
 
@@ -38,7 +38,10 @@ class UserAlertAdaptor(private val context: Context,
             holder.itemView.layoutParams = params
         }
     }
-
+    fun setContent(receiverList: List<String>) {
+        this.bloodTypeList = receiverList
+        this.notifyDataSetChanged()
+    }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(alert: Alert) {

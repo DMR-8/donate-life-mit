@@ -83,4 +83,8 @@ class AdminViewAlertsFragment : Fragment() {
         super.onStop()
         adaptor?.stopListening()
     }
+    override fun onDestroy() {
+        super.onDestroy()
+        adaptor?.stopListening()
+    }
 }
