@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
 import edu.manipal.donatelifemit.ApplicationState
 import edu.manipal.donatelifemit.MainViewModel
@@ -48,7 +49,7 @@ class ReceiveAlertsFragment : Fragment() {
             viewModel.setState(ApplicationState.CURRENT_ALERTS)
         }
 
-        adaptor = BloodTypeAdaptor(context,  bloodTypeList, viewModel.receiveAlertData.value!!, object: IBloodTypeSelectListener{
+        adaptor = BloodTypeAdaptor(context,  bloodTypeList, listOf(), object: IBloodTypeSelectListener{
             override fun addToList(bloodtype: String) {
                 if(!userList.contains(bloodtype)){
                     userList.add(bloodtype)
@@ -63,7 +64,10 @@ class ReceiveAlertsFragment : Fragment() {
 
         })
         bloodRecycler.adapter = adaptor
-        adaptor?.setContent(bloodTypeList, viewModel.userDetailsLiveData.value!!.receiveAlertList)
+        viewModel.receiveAlertData.observe( viewLifecycleOwner, Observer {
+            adaptor?.setContent(bloodTypeList, viewModel.userDetailsLiveData.value!!.receiveAlertList)
+        })
+
 
         receive_alert_btn.setOnClickListener {
             viewModel.userDetailsLiveData.value!!.receiveAlertList = userList

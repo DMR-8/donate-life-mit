@@ -11,14 +11,14 @@
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
         android:src="@drawable/logo"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="24dp"
         app:layout_constraintBottom_toTopOf="@id/loginHolder"
         app:layout_constraintStart_toStartOf="@id/loginHolder"
         app:layout_constraintEnd_toEndOf="@id/loginHolder"
         />
     <LinearLayout
         android:id="@+id/loginHolder"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,23 +28,26 @@
         >
         <EditText
             android:id="@+id/usernameField"
-            android:layout_width="250dp"
+            android:layout_width="300dp"
             android:layout_height="50dp"
-            android:layout_marginBottom="10dp"
+            android:lines="1"
+            android:layout_marginBottom="24dp"
             android:hint="UserName"
             />
         <EditText
             android:id="@+id/passwordField"
             android:inputType="textPassword"
-            android:layout_width="250dp"
+            android:layout_width="300dp"
+            android:lines="1"
             android:layout_height="50dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="24dp"
             android:hint="Password"
             />
         <com.google.android.material.button.MaterialButton
             android:id="@+id/loginButton"
             android:layout_width="250dp"
             android:layout_height="50dp"
+            android:layout_gravity="center"
             android:background="@color/colorPrimary"
             android:text="Log In"
             android:textColor="#FFFFFF"

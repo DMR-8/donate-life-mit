@@ -18,63 +18,40 @@
         android:orientation="vertical"
         >
 
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimary"
-                android:gravity="center"
-                android:text="New Alert"
-                android:textSize="20sp"
-                />
-
-    <LinearLayout
-        android:layout_width="250dp"
-        android:weightSum="10"
-        android:layout_marginTop="20dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
         <com.google.android.material.textview.MaterialTextView
-            android:layout_width="0dp"
-            android:layout_weight="5"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:gravity="left"
-            android:textColor="@android:color/black"
-            android:text="Type of Donation"
-            android:textSize="16sp"
+            android:textColor="@color/colorPrimary"
+            android:gravity="center"
+            android:text="New Alert"
+            android:textSize="24sp"
             />
-        <Spinner
-            android:id="@+id/donationTypeSpinner"
-            android:layout_weight="5"
-           android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="250dp"
-        android:weightSum="10"
-        android:layout_marginTop="20dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="0dp"
-            android:layout_weight="5"
-            android:layout_height="wrap_content"
-            android:gravity="left"
-            android:textColor="@android:color/black"
-            android:text="Blood Group"
-            android:textSize="16sp"
-            />
-        <Spinner
-            android:id="@+id/bloodGroupSpinner"
-            android:layout_weight="5"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            />
-    </LinearLayout>
         <LinearLayout
-            android:layout_width="250dp"
+            android:layout_width="300dp"
+            android:weightSum="10"
+            android:layout_marginTop="32dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="0dp"
+                android:layout_weight="5"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:textColor="@android:color/black"
+                android:text="Type of Donation"
+                android:textSize="18sp"
+                />
+            <Spinner
+                android:id="@+id/donationTypeSpinner"
+                android:layout_weight="5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="300dp"
             android:weightSum="10"
             android:layout_marginTop="20dp"
             android:layout_height="wrap_content"
@@ -86,19 +63,43 @@
                 android:layout_height="wrap_content"
                 android:gravity="left"
                 android:textColor="@android:color/black"
-                android:text="Units"
-                android:textSize="16sp"
+                android:text="Blood Group"
+                android:textSize="18sp"
                 />
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/unitText"
+            <Spinner
+                android:id="@+id/bloodGroupSpinner"
                 android:layout_weight="5"
-                android:inputType="number"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 />
         </LinearLayout>
         <LinearLayout
-            android:layout_width="250dp"
+            android:layout_width="300dp"
+            android:weightSum="10"
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="0dp"
+                android:layout_weight="4"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:textColor="@android:color/black"
+                android:text="Units"
+                android:textSize="18sp"
+                />
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/unitText"
+                android:layout_weight="6"
+                android:inputType="number"
+                android:layout_width="0dp"
+                android:textSize="18sp"
+                android:layout_height="wrap_content"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="300dp"
             android:weightSum="10"
             android:layout_marginTop="10dp"
             android:layout_height="wrap_content"
@@ -111,7 +112,7 @@
                 android:gravity="left"
                 android:textColor="@android:color/black"
                 android:text="Centre Name"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 />
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/centreNameText"
@@ -123,13 +124,13 @@
         </LinearLayout>
         <com.google.android.material.button.MaterialButton
             android:id="@+id/add_button"
-            android:layout_marginTop="20dp"
-            android:layout_width="150dp"
+            android:layout_marginTop="32dp"
+            android:layout_width="250dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_marginBottom="20dp"
             android:backgroundTint="#07ab17"
-            android:text="Send Alert"
+            android:text="Add Alert"
             android:textColor="#FFFFFF"
             />
 
@@ -138,7 +139,7 @@
         android:id="@+id/back_button"
         android:layout_marginTop="20dp"
         android:layout_width="150dp"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_gravity="center"
         android:layout_marginStart="10dp"
         android:layout_marginBottom="20dp"

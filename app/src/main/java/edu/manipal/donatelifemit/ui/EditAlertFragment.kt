@@ -83,7 +83,8 @@ class EditAlertFragment : Fragment() {
                     unitText.text.toString().toInt(),
                     System.currentTimeMillis(),
                     centreNameText.text.toString(),
-                    alert.alertID
+                    alert.alertID,
+                    alert.donatorList
                     )
                 viewModel.alertDatabase.child(alert.alertID).setValue(newAlert)
                 viewModel.setState(ApplicationState.ADMIN_ACCESS)
@@ -94,7 +95,6 @@ class EditAlertFragment : Fragment() {
     }
 
     companion object {
-
         @JvmStatic
         fun newInstance() =
             EditAlertFragment().apply {

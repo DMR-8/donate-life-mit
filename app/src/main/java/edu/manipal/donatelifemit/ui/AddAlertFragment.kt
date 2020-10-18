@@ -83,7 +83,9 @@ class AddAlertFragment : Fragment() {
                     alertID = newPostRef.key.toString()
                 )
                 newPostRef.setValue(newAlert)
+                Toast.makeText(requireContext(), "The alert has been sent.", Toast.LENGTH_SHORT).show()
                 viewModel.setState(ApplicationState.ADMIN_ACCESS)
+
             } else {
                 Toast.makeText(requireContext(), "Please fill in all the Values", Toast.LENGTH_SHORT).show()
             }

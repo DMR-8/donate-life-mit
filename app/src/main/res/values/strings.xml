@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Donate Life MIT</string>
+    <string name="app_name">Donate Life</string>
     <string name="title_current">Current Alerts</string>
     <string name="title_upcoming">Upcoming Events</string>
     <string name="title_admin">Admin Settings</string>
